@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmarTiles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-light fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+
+            <a class="navbar-brand mb-0 h1" href="index.html">SmarTiles</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarOpen">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse ml-auto" id="navbarOpen">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Início</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="d-flex justify-content-center align-items-center vh-100 text-center">
+        <h1 class="text-white" id="welcome-text">Bem Vindo!</h1>
+    </div>
+
+    <div>
+        <h5 class="text-center text-white">Aqui você poderá realizar seus cálculos sem dor de cabeça!</h5>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center vh-100 text-center">
+        <form> 
+            <h2 class="text-white text-center mb-3">Dimensões do Ambiente</h2>
+            <div class="row">
+                <div class="col form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="Largura (m)" id="AreaWidthInput">
+                  <label for="AreaWidthInput">Largura (m)</label>  
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="Altura (m)" id="AreaHeightInput">
+                  <label for="AreaHeightInput">Altura (m)</label>  
+                </div>
+            </div>
+            <div>
+                <h2 class="text-center text-white mt-3"> Área total</h2>
+                <h3 class="result text-center text-white mt-1" id="AreaResultDiv"></h3>
+            </div>
+
+            <div class="separator"></div>
+
+            <h2 class="text-white text-center mb-3">Dimensões do Piso</h2>
+              <div class="row">
+                <div class="col form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="Largura (cm)" id="TilesWidthInput">
+                  <label for="TilesWidthInput">Largura (cm)</label>  
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" placeholder="Altura (cm)" id="TilesHeightInput">
+                  <label for="TilesHeightInput">Altura (cm)</label>  
+                </div>
+                <div class="col form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="Espessura (mm)" id="TilesThicknessInput">
+                    <label for="TilesThicknessInput">Espessura (mm)</label>  
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="number" class="form-control" placeholder="Junta (mm)" id="TilesJointInput">
+                    <label for="TilesJointInput">Junta (mm)</label>  
+                  </div>
+              </div>
+                
+              <div class="separator"></div>
+
+              <div class="mb-3">
+                <h2 class="text-white mb-3" for="LossPercentageInput">Porcentagem de Perda (%)</h2>
+                <input type="range" class="form-control mb-3" min="0" max="100" step="5" value="20" id="LossPercentageInput" oninput="updatePercentage(this.value)">
+                <h3 class="text-white">Valor Atual: <span id="percentageValue">20%</span></h3>
+              </div>
+
+              </div>
+        </form>
+        </div>
+
+
+
+
+
+
+
+    <!--
+    <div id="visualizacao"></div>
+    <div id="info">Largura: 0px, Comprimento: 0px</div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        const larguraInicial = 100;
+        const comprimentoInicial = 50;
+
+        // Define dimensões do SVG
+        const svgLargura = 500;
+        const svgAltura = 400;
+
+        // Seleciona o elemento e cria o SVG
+        const svg = d3.select("#visualizacao")
+            .append("svg")
+            .attr("width", svgLargura)
+            .attr("height", svgAltura)
+            .style("border", "1px solid black");
+
+        // Cria um retângulo inicial
+        const rect = svg.append("rect")
+            .attr("x", 10)
+            .attr("y", 10)
+            .attr("width", larguraInicial)
+            .attr("height", comprimentoInicial)
+            .attr("fill", "steelblue")
+            .call(d3.drag()  // Adiciona evento de drag ao retângulo
+                .on("drag", dragged));
+
+        // Atualiza os valores de largura e comprimento na tela
+        function updateInfo(largura, comprimento) {
+            d3.select("#info").text(`Largura: ${largura}px, Comprimento: ${comprimento}px`);
+        }
+
+        // Função que será chamada ao arrastar o retângulo
+        function dragged(event) {
+            const novaLargura = event.x - 10;
+            const novoComprimento = event.y - 10;
+
+            // Define limites mínimos para o retângulo
+            if (novaLargura > 0 && novoComprimento > 0) {
+                rect.attr("width", novaLargura)
+                    .attr("height", novoComprimento);
+
+                // Atualiza as informações de largura e comprimento
+                updateInfo(novaLargura, novoComprimento);
+            }
+        }
+
+        // Inicializa com os valores padrões
+        updateInfo(larguraInicial, comprimentoInicial);
+    </script>
+    //-->
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        const widthInput = document.getElementById('AreaWidthInput');
+        const heightInput = document.getElementById('AreaHeightInput');
+        const AreaResultDiv = document.getElementById('AreaResultDiv');
+
+        function calculateArea() {
+            const width = parseFloat(widthInput.value);
+            const height = parseFloat(heightInput.value);
+
+            if (!isNaN(width) && !isNaN(height)) {
+                const area = width * height;
+                AreaResultDiv.textContent = `${area} m²`;
+            } else {
+                AreaResultDiv.textContent = '0 m²';
+            }
+        }
+
+        widthInput.addEventListener('input', calculateArea);
+        heightInput.addEventListener('input', calculateArea);
+
+        function updatePercentage(value) {
+            document.getElementById('percentageValue').textContent = value + '%';
+        }
+
+    </script>
+
+<footer class="bg-transparent text-light py-4">
+    <div class="container text-center">
+      <p class="mb-1">© 2024 SmarTiles. Todos os direitos reservados.</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="#" class="text-light">Política de Privacidade</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="text-light">Termos de Uso</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#" class="text-light">Contato</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

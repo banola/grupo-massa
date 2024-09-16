@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(to right, rgba(8, 3, 82, 0.8), rgba(53, 2, 77, 0.8));
+     min-height: 100vh;
+     margin: 0;
+     background-attachment: fixed;
+     background-size: cover;
+ }
+
+.navbar {
+    background-color: rgba(205, 205, 255, 0.7);
+}
+
+#welcome-text{
+    font-size: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: subtleSlideUp 2s ease-out forwards;
+}
+
+@keyframes subtleSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+form, footer{
+    background: rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.separator {
+    border-top: 2px solid #fff;
+    margin: 20px 0;
+}
+
+.form-floating {
+    font-size: 2rem;
+    position: relative;
+}
+.form-floating label {
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.form-control {
+    text-align: center;
+}
+
+  
